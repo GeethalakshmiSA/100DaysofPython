@@ -1,0 +1,120 @@
+3 Python Compilation
+
+	3.1 Installation of Python Compiler
+				
+		Python executable file downloaded from https://www.python.org/downloads/release/python-3105/
+		Install from the official site and install 
+		While installing, add env variable by default
+		
+	3.2 Set up Python Shell
+		
+		By doing 3.1, we get python shell which is called IDLE is installed by default.
+		No separate installation required
+	
+	3.3 Hello World Program and Execution
+		
+		>>> print("Hello World!")
+		o/p : Hello World!
+		
+4. Some Concepts
+
+	4.1 PY Keywords
+	
+		Keywords are reserved words that can not be used as a variable name, function name, or any other identifier.
+		In total, there are 33 keywords in python
+		To get all Keywords in Python : 
+			import keywords
+			keyword.kwlist
+		The list of keywords is : 
+			‘False’, ‘None’, ‘True’, ‘and’, ‘as’, ‘assert’, ‘async’, ‘await’, ‘break’, ‘class’, ‘continue’, ‘def’, ‘del’, ‘elif’, ‘else’, ‘except’, ‘finally’, ‘for’, ‘from’, ‘global’, ‘if’, ‘import’, ‘in’, ‘is’, ‘lambda’, ‘nonlocal’, ‘not’, ‘or’, ‘pass’, ‘raise’, ‘return’, ‘try’, ‘while’, ‘with’, ‘yield’
+		To check whether given string is a keyword: 
+			import keyword
+			keyword.iskeyword() //returns true if string is a keyword
+		
+	4.2 Namespace
+	
+		A namespace is a system that has a unique name for each and every object in Python.
+		An object might be a variable or a method.
+		Python interpreter understands what exact method or variable one is trying to point to in the code, depending upon the namespace
+		NAME -> unique identifier and SPACE -> scope
+		Types of Namespace:
+			Built-in Namespace - functions like print(), id() (without any user-defined modules, classes, etc)
+			Global Namespace   - To say, modules creation
+			Local Namespace    - To say, functions created within modules
+		Lifetime of the namespace -> Depends on the Scope of Objects
+		Not possible to access the inner namespace's object from an outer namespace
+		
+	4.3 Scope
+		
+		Coding region from which a particular Python object is accessible.
+		Cannot access any particular object from anywhere from the code, the accessing has to be allowed by the scope of the object.
+		
+	4.4 Statement
+	
+		Instructions written in the source code for execution are called as statements
+		Types of statements: Assignment, Conditional, Looping, etc.
+		Muliti-line statements: extended to more than one line using braces, parentheses, square brackets, semi-colon, continuation character slash, etc.
+		
+	4.5 Indentation
+	
+		Blocks are regarded as the grouping of statements
+		Python uses indentation to highlight the block of code
+		Whitespace is used for indentation
+		All statements with the same distance to the right belong to the same block of code
+	
+	4.6 Comments
+	
+		To improve the readability of the logic or part of code 
+		Types of Comments:
+			Single Line Comment  -  # hashtag is used for single line comment
+			Multi-line Comments  -  ''' triple quotes are used to define the multiple line comments - to represent block of code'''
+			DocStrings           -  """ double quotes represents docstring comments which is used in functions and classes """
+	
+	4.7 Way of Structuring Programs
+	
+		Interpreter reads and executes the statements line by line i.e., sequentially
+		Alter this behavior plays the conditional statements
+		Mostly python codes are written in single line
+		Mulitple lines per line is possible by a terminator symbol (;)
+		Also, there are ways to write the single line of code in multiple lines (This is not a good practice)
+			Way #1
+				if (no_of_teachers == 10 and no_of_female_students == 30 and no_of_male_students == 20 and (x + y) == 30):
+					print('The course is valid')
+				# This could be done instead:
+				if (no_of_teachers == 10 and no_of_female_students == 30
+					and no_of_male_students == 20 and x + y == 30):
+					print('The course is valid')
+			Way #2
+				Implicit Line Continuation -> Using brackets, braces, parentheses
+			Way #3
+				Explicit Line Continuation -> Using Backslash (\) to indicate that a statement spans more than one line	
+					x = \
+					1 + 2 \
+					+ 5 + 6 \
+					+ 10
+				  print(x)
+			
+	4.8 Primitive Data types
+	
+		Built-In data types are as follows-
+			Text Type		:	str
+			Numeric Types	:	int, float, complex
+			Sequence Types	:	list, tuple, range
+			Mapping Type	:	dict
+			Set Types		:	set, frozenset
+			Boolean Type	:	bool
+			Binary Types	:	bytes, bytearray, memoryview
+			None Type		:	NoneType
+		
+		There are 4 Primitive Data types : int, float, string, boolean
+			
+	
+	4.9 Mutability and Immutability
+	
+		Mutable 	-> Ability to change
+		Immutable 	-> No possibility to change
+		
+		Ability of objects to change their values are called as mutable objects
+			Ex: List, Set, Dictionary
+		If the value of the object cannot be changed over time is called to be immutable objects
+			Ex: Numbers, Strings, Tuples, Frozen Sets
