@@ -1,0 +1,117 @@
+2. Small brief on Interpreter
+
+	2.1 Invoking interpreter and environment variables
+	
+		Interpreter - To interpret and run our programs
+		To have this interpreter of python - install python from official site
+		Python Interpreter is usually installed as -> /usr/local/bin/python3.10 on the local machines
+		Command to exit the interpreter -> quit()
+		Interpreter's features : interactive editing, history substitution, code completion on systems which has GNU support
+		To check command line-editing support -> Control -P 
+			If yes, it beeps
+			If ^P is echoed, command line editing isn’t available
+		Agrument Passing in Interpreter:
+			script name and additional arguments turn into list of strings
+			list is then assigned to argv (variable) in sys (module)
+			To access this list, use -> import sys
+			Default length of the list is 1
+			When no script & argument is given -> sys.argv[0] is empty string
+			when script name is '-' -> sys.argv[0] is set to '-'
+			-c represents command and -m represents module
+		When reading commands from terminal -> Interpreter is in Interactive mode
+			primary prompt - '>>>'
+			secondary prompt - '...'
+		Environment Variables
+			Windows allows to configure the environment variables permanently 
+				**At User Level and At System Level
+				Start -> Search 'Edit Environment Variables' or (open System Properties -> Advanced System Settings -> click env variables button) -> add or modify user and system variables 
+			Temporarily set using command prompt
+				C:\>set PATH=C:\Program Files\Python 3.9;%PATH%
+				C:\>set PYTHONPATH=%PYTHONPATH%;C:\My_python_lib
+				C:\>python
+			(Modifying PATH by adding the directory containing python.exe to the start is a common way to ensure the correct version of Python is launched.)
+	
+	2.2 os and sys
+		
+		OS - This is a module which provides functions for creating and removing a directory (folder), fetching its contents, changing and identifying the current directory, etc.
+			To use this module -> import os
+				os.getcwd() //to get current working directory
+				os.mkdir("C:\MyPythonProject") //to create a directory (By default, if you don't specify the whole path in the mkdir() function, it will create the specified directory in the current working directory or drive)
+				os.chdir("C:\MyPythonProject") //to change current working directory
+				os.chdir("C:\\") //to change drive
+				os.chdir("..") //to set the current directory to the parent directory use ".." as the argument in the chdir() function.
+				os.rmdir("C:\\MyPythonProject") //to remove a directory
+				os.listdir("c:\python37") //returns list of all files and directories in specified path
+				os.listdir() //returns list of all files and directories in the current working directory
+				
+		SYS - This is a module which provides functions and variables used to manipulate different parts of the Python runtime environment. 
+			sys.argv 
+				returns a list of command line arguments passed to a Python script. 
+				The item at index 0 in this list is always the name of the script.
+				The rest of the arguments are stored at the subsequent indices.
+				Example: test.py
+					import sys
+					print("You entered: ",sys.argv[1], sys.argv[2], sys.argv[3]
+				In prompt, command line arguments are given like : >>> python test.py Python C# Java
+				Here, sys.argv[1] -> Python; sys.argv[2] -> C#; sys.argv[3] -> Java 
+				sys.argv[0] -> test.py (script name)
+			sys.exit -> use in case of any exception
+			sys.maxsize -> Returns the largest integer a variable can take
+			sys.path -> This is an environment variable that is a search path for all Python modules
+			sys.version -> This attribute displays a string containing the version number of the current Python interpreter
+			
+	2.3 Memory Management
+	
+		Improper memory management leads to slowness on application and server side components
+		In Python, this is managed by PYTHON MEMORY MANAGER
+		Python Manager determines where to put the application data in the memory
+		Memory Allocation is a essential part of memory management
+		This allots free space in computer's virtual memory - It has 2 types
+			Static Memory Allocation
+				Happens at Compile Time
+				When a memory is alloted, it is fixed and cannot use that memory again in the further program
+				STACK data structure - Used for static memory allocation
+				Needed only inside the particular Function or Method call
+				When a function is called, it gets added in the program's call stack
+				Variable assignment inside the function - Temporarily stored in the stack
+				When function returns the value, stack moves to next task/call 
+				All these are handled by compiler
+			Dynamic Memory Allocation
+				Happens at Run Time/Execution 
+				HEAP - implements the dynamic memory allocation
+				Memory is used throughout the program
+				Python manager automatically deletes/vanishes the object when not in use
+				Heap memory works outside the program at global space
+				
+		Garbage Collector
+			Process of vanishing the unnneccesary memory space is called Garbage Collector
+			GC initiates its exection with the program
+			GC gets activated if the reference count falls to zero
+			Whenever new name is assigned, the reference count increases its value
+			If reassigned the reference to an object, the reference count decreases its value
+			Also decreases, when object's reference goes out of scope or gets deleted
+			Reference Counting:
+				How many times other object references the object
+				Example:
+					When x=20, 20 sits in a memory when is pointed as x 
+					then if y=x, it means y also equals to 20 
+					In this case, no need separate memory allocated for y's value, instead 20 is added with another pointer called y
+					If now x+=1, then x = 21 and y = 20 -> This makes to have separate memory allocated for x and y with their values
+			GC - classifies the object using generation (there are 3 generations)
+			When new object is defined -> Handled by GC's First Generation
+			If the object has use in different program -> handled by next generations
+			Every generation has threshold
+			When does GC comes into action ? => Threshold of number of allocations MINUS Number is de-allocation is exceeded
+			get_threshold() //to get threshold value 
+			set_threshold() //to modify threshold value manually
+			gc.collect() //to get the number of collected and de-allocated objects
+			Manual GC happens in 2 ways -> Time-Based and Event-Based
+			gc.garbage //uncollectable garbage
+			
+	2.4 Common Ways to reduce space complexity
+
+			Avoid List Slicing - As it creates copy of same list with another memory allocated
+			Use list indexing carefully - USE "for item in array" AND NOT "for index in range(len(array))"
+			String concatenation - Don't use '+' and instead use .join()
+			Use Iterators and Generators
+			Use In-Built library whenever possible
