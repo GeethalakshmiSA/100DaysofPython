@@ -1,0 +1,235 @@
+5. Python as Calculator
+		
+	5.1 Detailed view on Numbers 
+	
+		Interpreter acts as a simple calculator
+		Classical Division operator always return  floating point number 
+			Ex: 8/5 -> 1.6 and (50 - 5*6)/4 -> 5.0
+		Floor Division (//) always return integer (without fractional part)
+		Modulo (%) returns remainder of the division
+		** operator is used to calculate powers
+			Ex: 5 ** 2 gives 25 and 2**7 gives 128
+		If a variable is not defined/assigned any value, trying to use it will result an error	
+		Operators with mixed type operands convert the integer operand to floating point
+			Ex: 4 * 3.75 - 1 gives 14.0
+		As in the interactive mode of calculator, the last printed expression is assigned to the variable _ (underscore) by default.
+			This is useful to continue calculations
+			Ex: price = 100
+				quantity = 25
+				price * quantity #2500
+				_ * (20/100) # calculating discount using the default variable _ (underscore) gives 500.0
+			Don’t explicitly assign a value to it — you would create an independent local variable with the same name masking the built-in variable with its magic behavior.
+		In addition to int and float, Python supports other types of numbers, such as Decimal and Fraction. Python also has built-in support
+		for complex numbers, and uses the j or J suffix to indicate the imaginary part (e.g. 3+5j).
+		
+	5.2 Arithmetic Operations
+	
+		References on Types:
+			INT 	- https://docs.python.org/3/library/functions.html#int
+			FLOAT 	- https://docs.python.org/3/library/functions.html#float
+			DECIMAL	- https://docs.python.org/3/library/decimal.html#decimal.Decimal
+			FRACTION- https://docs.python.org/3/library/fractions.html#fractions.Fraction
+			Built-in Types - https://docs.python.org/3/library/stdtypes.html#typesnumeric
+			
+6 Input/Output
+
+	6.1 Taking input from user/console
+	
+		Built-in functions to read input from keyboard/user 
+			input() #py 3.x
+			raw_input() #py 2.x
+		input() function takes the input from the user and converts it into a string (even the integer value is converted to string)
+			Example:
+				>>>num = input("Enter the value ")
+				Enter the value 50
+			Here, the value 50 is converted to string and not stored as integer 
+		If the value needs to be in integer then that needs to be explicitly converted using typecasting
+			Example: to get and store the value 50 as integer, use as below
+				>>>num = int(input("Enter the value ")
+			Now, the value 50 is stored as integer
+		If, to get 2 input values in single line then: Either use the input() function 2 times Or use split() function
+			Example: 
+				i)  x, y = input(),input()
+				ii) x, y = input().split()
+			Note that we don’t have to explicitly specify split(‘ ‘) because split() uses whitespace characters as a delimiter as default
+		Syntax of split() function - input().split(separator, maxsplit)
+	
+	6.2 Output using print() and its working
+	
+		print() function - prints the message to the screen or any other standard output device
+		Syntax - print(value(s), sep= ‘ ‘, end = ‘\n’, file=file, flush=flush)
+		\n : This string literal is used to add a new blank line while printing a statement
+			Example: print("Everything will be ok soon \n Don't worry")
+				o/p - Everything will be ok soon
+					  Don't worry
+		
+		Flush Argument:
+			I/O's in Python are generally buffered i.e., simply they are used in chunks
+			used to decide whether the written content needs to be buffered or not
+			By default, it is set to false
+			If it is set to true, the output will be written as a sequence of characters one after the other
+			This process is simply slow 
+			Example to understand this argument clearly:				
+			1. 	import time
+				 
+				count_seconds = 3
+				for i in reversed(range(count_seconds + 1)):
+					if i > 0:
+						print(i, end='>>>')
+						time.sleep(1)
+					else:
+						print('Start')
+			2.  import time
+				 
+				count_seconds = 3
+				for i in reversed(range(count_seconds + 1)):
+					if i > 0:
+						print(i, end='>>>', flush = True)
+						time.sleep(1)
+					else:
+						print('Start')
+			Try to run both (1 & 2) programs and see the difference with the buffering time
+			1 - will be print the output (all characters) at a time
+			2 - will be printing the characters one after the other with the respective time
+	
+	6.3 Formatting String/Output Literals
+	
+		Literal String Interpolation or F-Strings - prefix the string with the letter "f" or "F"
+		Backslash Cannot be used in format string directly
+			Example #1:
+				name = 'Tushar'
+				age = 23
+				print(f"Hello, My name is {name} and I'm {age} years old.")
+			o/p - Hello, My name is Tushar and I'm 23 years old.
+			
+			Example #2:
+				import datetime
+				today = datetime.datetime.today()
+				print(f"{today:%B %d, %Y}")
+			o/p - June 21, 2022
+			Example #3: Incorrect way of using f-strings or syntax error				
+				answer = 456
+				f"Your answer is "{answer}""
+		
+		Format() function : str.format()
+			This function is a built-in string class function which provides functionality for complex variable substitutions and value formatting.
+			Formatters work by putting in one or more replacement fields and placeholders defined by a pair of curly braces { } into a
+			string and calling the str.format()
+			Values that exist within the str.format() method are essentially tuple data typeseach individual value contained in the tuple can be called by its index number, which starts with the index number 0
+			
+				Example #1: For Single Formatter
+					str = "This article is written in {}"
+					print(str.format("Python"))
+				o/p - This artice is written in Python
+				
+				Example #2: For Multiple Formatters
+					print("This is {} {} {} {}".format("one", "two", "three", "four"))
+				o/p - This is one two three four
+					
+				Example #3: IndexError
+					my_string = "{}, has {} {} for {}"
+					print(my_string.format("This Repo", "Notes", "Python"))
+				o/p  IndexError - tuple index out of range
+				
+				Example #4: Placeholders with index number
+					print("{0} love {1}!!".format("We","Python"))
+				o/p - We love Python
+
+				Example #5: Placeholders with unordered index numbers
+					print("Every {3} should know the use of {2} {1} programming and {0}".format("programmer", "Open", "Source", "Operating Systems"))
+				o/p - Every Operating Systems should know the use of Source Open programming and programmer
+			
+				Example #6: Keyword Arguments
+					print("{py} is a {0} language which is easy to {1}".format("programming", "learn", py="Python"))
+				o/p - Python is a programming language which is easy to learn
+				
+		Escape Sequence in python starts with backslash (\).
+			\n - new line
+			\t - horizontal tab
+			\\ - backslash
+			\' - single quote
+			\" - doubt quotes
+
+		Formatting using string modulo (%) operator:
+			% operator is used for string formatting which does the specifies the type
+			Also, colon (:) symbol can be usd instead and/or in-place of modulo (%)
+			Example #1: 
+				print("%20s" % ('Python', ))
+				o/p -       Python
+			Example #2:
+				print("Number : %2d, Fractionals : %5.2f" % (1, 05.333))
+				o/p - Number : 1, Fractionals : 5.33
+			Example #3:
+				print("%7.3o" % (25))
+				o/p -     031
+			Example #4:
+				print("First number :{0:2d}, Second number :{1:8.2f}".format(12, 00.546))
+				o/p - First number :12, Second number :0.55
+			Other type specifying
+				%u - unsigned decimal integer
+				%o - octal integer
+				f  – floating point display
+				b  – binary
+				o  – octal
+				%x – hexadecimal with lowercase letters after 9
+				%X – hexadecimal with uppercase letters after 9
+				e  – exponent notation
+		
+		Generating Spaces:
+			By Default, strings are left-justified within the field, and numbers are right-justified
+				<   :  left-align text in the field
+				^   :  center text in the field
+				>   :  right-align text in the field
+			Example - 
+				print("{:*^20s}".format("Python"))
+			o/p - *******Python*******	
+			Reference : Example number 8 in this page "https://www.geeksforgeeks.org/python-string-format-method/".
+		
+		Using dictionary for string formatting
+			Using a dictionary to unpack values into the placeholders in the string that needs to be formatted. 
+			We basically use ** to unpack the values. 
+			This method can be useful in string substitution while preparing an SQL query.
+			Example:
+				introduction = 'My name is {first_name} {middle_name} {last_name} AKA the {aka}.'
+				full_name = {
+					'first_name': 'Tony',
+					'middle_name': 'Howard',
+					'last_name': 'Stark',
+					'aka': 'Iron Man',
+				}
+				print(introduction.format(**full_name))
+			o/p :
+				My name is Tony Howard Stark AKA the Iron Man.
+		
+		String formatting methods:
+			
+			Example:				
+				cstr = "I love Python"
+				print ("Center aligned string with fillchr: ")
+				print (cstr.center(40, '#'))
+				print ("The left aligned string is : ")
+				print (cstr.ljust(40, '-'))
+				print ("The right aligned string is : ")
+				print (cstr.rjust(40, '-'))
+			o/p:
+				Center aligned string with fillchr: 
+				##########I love geeksforgeeks##########
+
+				The left aligned string is : 
+				I love geeksforgeeks--------------------
+
+				The right aligned string is : 
+				--------------------I love geeksforgeeks
+		
+	6.4 END & SEP Parameters in print()
+	
+		The print() function can accept any number of positional arguments
+		
+		END keyword - specify the content that is to be printed at the end of the execution of the print() function
+		By default, it is set to “\n”, which leads to the change of line after the execution of print() statement
+		
+		SEP keyword - used to separate from each other using a “,” separator
+		These are primarily used for formatting multiple statements in a single print() function
+		Ex: b = "is"
+			print("God", b , "Great")			
+		o/p - God is Great
