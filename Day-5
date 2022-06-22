@@ -1,0 +1,134 @@
+7 Variables
+
+	7.1 Rules of Declaration
+	
+		Variables 	- No need to declare and can be used directly. Variables are case-sensitive
+					  Example: a = 10 and A = 20 are different.
+		A variable can have a short name (like x and y) or a more descriptive name (age, carname, total_volume).
+		Rules for Python variables:
+			A variable name must start with a letter or the underscore character
+			A variable name cannot start with a number
+			A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )
+			Variable names are case-sensitive (age, Age and AGE are three different variables)
+			
+		Expressions - Arithmetic operations can be performed using arithmetic operations
+					  Example: a = 10, b = 20, c = a + b where given c is a expression
+		
+	7.2 Global and Local Variables
+	
+		Global Variables:
+			Variables which are not defined inside any function 
+			Variables having global scope
+			Accessible throughout the program and inside every function
+			
+		Local Variables:
+			Variables which are defined inside any function
+			Variable's scope limited to that particular function only
+			Cannot be accessed anywhere outside the function in which it is initialized
+		
+		what if there is a variable with the same name initialized inside a function as well as globally ?
+			If a variable with the same name is defined inside the scope of function as well then it will print the value given inside the function only and not the global value.
+		
+		what if we try to change the value of a global variable inside the function ?
+			Use 'Global' Keyword - to do assignments or change the global variable in a function, where the keyword is not need for printing and accessing.
+		
+		Example:
+			a = 1			 
+			# Uses global because there is no local 'a'
+			def f():
+				print('Inside f() : ', a)
+			# Variable 'a' is redefined as a local
+			def g():
+				a = 2
+				print('Inside g() : ', a)
+			# Uses global keyword to modify global 'a'
+			def h():
+				global a
+				a = 3
+				print('Inside h() : ', a)
+			# Global scope
+			print('global : ', a)
+			f()
+			print('global : ', a)
+			g()
+			print('global : ', a)
+			h()
+			print('global : ', a)
+		O/P:
+			global :  1
+			Inside f() :  1
+			global :  1
+			Inside g() :  2
+			global :  1
+			Inside h() :  3
+			global :  3
+	
+	7.3 Underscore in Python
+		
+		Following are different places where _ is used in Python:
+		#Single Underscore
+		1. In Interpreter 		- _ returns the value of last executed expression value in Python Prompt/Interpreter
+		2. For ignoring values 	- Multiple time we do not want return values at that time to assign those values to Underscore. It used as throwaway variable.
+		3. After a name 		- Default keywords cannot be used as the variable name. To avoid such conflict between python keyword and variable we use underscore after name.
+		4. Before a name 		- Leading Underscore before variable/function/method name indicates to programmer that It is for internal use only, that can be modified whenever class want. Here name prefix by underscore is treated as non-public. If specify from Import * all the name starts with _ will not import. Python does not specify truly private so this ones can be call directly from other modules if it is specified in __all__, We also call it weak Private.
+			Example: 
+			Python class_file.py
+				def public_api():
+					print ("public api")
+				  
+				def _private_api():
+					print ("private api")
+				
+			Calling file from Prompt
+
+				>>> from class_file import *
+				>>> public_api()
+				public api
+				  
+				>>> _private_api()
+				Traceback (most recent call last):
+				File "<stdin>", line 1, in <module>
+				NameError: name '_private_api' is not defined
+				  
+				>>> import class_file
+				>>> class_file.public_api()
+				public api
+				>>> class_file._private_api()
+				private api
+		
+		#Double Underscore
+		1. leading double underscore - Leading double underscore tell python interpreter to rewrite name in order to avoid conflict in subclass.Interpreter changes variable name with class extension and that feature known as the Mangling.
+			Mangling : ython interpreter modify variable name with ___. So Multiple time It use as the Private member because another class can not access that variable directly. Main purpose for __ is to use variable/method in class only If you want to use it outside of the class you can make public api
+		2. _Befor_After_ - Name with start with __ and ends with same considers special methods in Python which provides these methods to use it as the operator overloading depending on the user. This convention to differentiate between the user-defined function with the module’s function.
+		
+		Reference : https://www.geeksforgeeks.org/underscore-_-python/
+		
+	7.4 Private Variables
+	
+		No existence of private instance variables which cannot be accessed except inside an object.
+		A name prefixed with underscore is treated as non-public part of the code
+		
+	7.5 Swap Two Variables
+	
+		 Simple and Syntactically construct : x, y = y, x 
+		 Alternative ways to swap two variables in Python : https://www.geeksforgeeks.org/swap-two-numbers-without-using-temporary-variable/
+		 
+	7.6 Type Conversion / Casting
+	
+		Types :
+			Implicit - interpreter automatically converts one data type to another without any user involvement
+			Explicit - he data type is manually changed by the user as per their requirement
+			
+		Some Functions for Explicit type:
+			1.  int(a, base): This function converts any data type to integer. ‘Base’ specifies the base in which string is if the data type is a string.
+			2. float(): This function is used to convert any data type to a floating-point number 
+			3. ord() : This function is used to convert a character to integer.
+			4. hex() : This function is to convert integer to hexadecimal string.
+			5. oct() : This function is to convert integer to octal string.
+			6. tuple() : This function is used to convert to a tuple.
+			7. set() : This function returns the type after converting to set.
+			8. list() : This function is used to convert any data type to a list type.
+			9. dict() : This function is used to convert a tuple of order (key,value) into a dictionary.
+			10. str() : Used to convert integer into a string.
+			11. complex(real,imag) : This function converts real numbers to complex(real,imag) number.
+			12. chr(number): This function converts number to its corresponding ASCII character. 
