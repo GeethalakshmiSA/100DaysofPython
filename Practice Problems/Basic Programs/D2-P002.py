@@ -32,3 +32,20 @@ def fibo(n):
         
 num = int(input("Enter the number to find the fibonacci from the series : "))
 print("Fibonacci number from the given input : ", fibo(num))
+
+# Model 3 : To find whether the given number is Fibonacci or not
+
+import math
+ 
+def isPerfectSquare(x):
+    s = int(math.sqrt(x))
+    return s*s == x
+
+def isFibonacci(n):
+    return isPerfectSquare(5*n*n) or isPerfectSquare(5*n*n + 4)
+
+num = int(input("Enter a number to check the fibonacci : "))
+if (isFibonacci(num) == True):
+    print(num, "is a Fibonacci Number")
+else:
+    print(num, "is a not Fibonacci Number ")
