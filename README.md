@@ -8,3 +8,9 @@ Chapter List/Topics
   2 - Interpreters and Memory Management
   3 - Python Setup
   4 - Concepts to be known
+
+
+Practice Problems
+
+1 => Basic Programs
+2 => Arrays
